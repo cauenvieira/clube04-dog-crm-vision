@@ -1,7 +1,11 @@
 import type { ReactNode } from "react";
 import { Sidebar } from "./Sidebar";
+import { LoginScreen } from "@/components/auth/LoginScreen";
+import { useAuth } from "@/lib/auth-store";
 
 export function AppLayout({ children }: { children: ReactNode }) {
+  const { currentUser } = useAuth();
+  if (!currentUser) return <LoginScreen />;
   return (
     <div className="min-h-screen flex bg-background">
       <Sidebar />
@@ -38,7 +42,7 @@ export function MockBadge() {
   return (
     <span className="inline-flex items-center gap-1.5 text-[10px] uppercase font-bold tracking-wider px-2 py-1 rounded-md bg-warning/15 text-amber-700 border border-warning/30">
       <span className="w-1.5 h-1.5 rounded-full bg-amber-600" />
-      Modo mockup
+      Protótipo operacional
     </span>
   );
 }
